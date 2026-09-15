@@ -19,6 +19,15 @@ pero sin caché, para que el navegador recargue siempre el CSS y el JS al guarda
 cambios. Si usas `python -m http.server` o *Live Server* de VS Code también
 funciona, pero tras cambiar archivos haz recarga forzada (`Ctrl + F5`).
 
+## Publicar en GitHub Pages
+
+El sitio está en <https://pascual890.github.io/Visualizaci-n-de-datos-Cregon/>.
+Tras cada cambio: `git add . && git commit -m "..." && git push`.
+
+El archivo `.nojekyll` de la raíz es necesario: sin él GitHub ignora los
+archivos que empiezan por `_` (como `js/charts/_mapa-util.js`) y la página se
+queda sin gráficos.
+
 ## Estructura
 
 ```
