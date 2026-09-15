@@ -1,0 +1,10 @@
+{
+  "name": "cronica-cregon",
+  "version": "1.0.0",
+  "description": "Crónica del Reino de Cregon — visualización de datos con Chart.js",
+  "private": true,
+  "scripts": {
+    "dev": "python serve.py",
+    "start": "python serve.py"
+  }
+}

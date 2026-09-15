@@ -1,0 +1,5 @@
+{
+  "unidad": "porcentaje",
+  "labels": ["Vareck", "Vandel", "Voss", "Tierra de los aldeanos", "Baldíos y bosque"],
+  "valores": [38, 22, 15, 20, 5]
+}

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crónica del Reino de Cregon</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cinzel+Decorative:wght@700&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <!-- Chart.js (UMD) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+  <header class="hero">
+    <div class="hero__inner">
+      <p class="hero__kicker">✦ &nbsp;Cuentas, censos y registros del reino&nbsp; ✦</p>
+      <h1 class="hero__title">Crónica del Reino<br />de Cregon</h1>
+      <p class="hero__sub">De los años 1199 a 1218, según los archivos de la corona</p>
+      <div class="ornament" aria-hidden="true">❦</div>
+      <p class="hero__lead">
+        <span class="dropcap">E</span>sta página acompaña al cuento <em>Sin familia no importa el emblema</em>.
+        Dos hermanos que viven del robo le quitan una daga a un noble de la casa Vareck en
+        plena plaza. Para entender por qué en Cregon hay gente que roba para comer mientras
+        tres familias se quedan con casi todo, aquí están los números del reino: cuánto
+        tiene cada casa, qué pasó con la gente después de la guerra, de quién es la tierra
+        y cuántos robos se denuncian cada año.
+      </p>
+    </div>
+  </header>
+
+  <!-- Índice de capítulos -->
+  <nav class="nav" id="nav" aria-label="Índice de capítulos"></nav>
+
+  <main class="main" id="app">
+    <!-- Las secciones de cada capítulo se generan desde js/main.js -->
+  </main>
+
+  <footer class="footer">
+    <div class="ornament" aria-hidden="true">❦</div>
+    <p class="footer__end">Aquí termina la crónica</p>
+    <p>Fuente de los datos: <span id="fuente">archivos del reino de Cregon (cuento de ficción)</span></p>
+    <p class="footer__meta">Láminas trazadas con Chart.js</p>
+  </footer>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

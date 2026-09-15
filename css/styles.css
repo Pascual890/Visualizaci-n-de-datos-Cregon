@@ -1,0 +1,429 @@
+/* ============================================================
+   Crónica del Reino de Cregon — tinta sobre pergamino
+   ============================================================ */
+:root {
+  --pergamino:      #e6d7b8;   /* fondo general (mesa / cuero) */
+  --pagina:         #f3e9d2;   /* hoja de cada capítulo */
+  --pagina-2:       #e9dcbf;   /* hoja envejecida (botones, tooltips) */
+  --tinta:          #2b1d0e;
+  --tinta-tenue:    #6e5a45;
+  --sangre:         #8a2f1f;
+  --oro:            #b8862b;
+  --verde:          #3f5a3a;
+  --linea:          rgba(43, 29, 14, .35);
+  --linea-suave:    rgba(43, 29, 14, .15);
+
+  --maxw: 1080px;
+  --serif:   'IM Fell English', 'EB Garamond', Georgia, 'Times New Roman', serif;
+  --titulos: 'Cinzel', Georgia, serif;
+  --gran:    'Cinzel Decorative', 'Cinzel', Georgia, serif;
+
+  /* grano del pergamino (SVG en línea, sin peticiones externas) */
+  --grano: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.25  0 0 0 0 0.17  0 0 0 0 0.08  0 0 0 .18 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  color: var(--tinta);
+  font-family: var(--serif);
+  font-size: 17px;
+  line-height: 1.6;
+  background-color: var(--pergamino);
+  background-image:
+    var(--grano),
+    radial-gradient(1200px 600px at 50% -10%, rgba(255, 250, 235, .55), transparent 70%),
+    radial-gradient(900px 500px at 50% 110%, rgba(90, 60, 20, .22), transparent 70%);
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: rgba(184, 134, 43, .35); }
+
+/* ============================================================
+   Ornamentos
+   ============================================================ */
+.ornament {
+  color: var(--sangre);
+  font-size: 1.8rem;
+  line-height: 1;
+  text-align: center;
+  margin: 18px 0;
+  position: relative;
+}
+.ornament::before,
+.ornament::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: min(180px, 30%);
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--linea));
+}
+.ornament::before { right: calc(50% + 28px); }
+.ornament::after  { left: calc(50% + 28px); transform: scaleX(-1); }
+
+.dropcap {
+  float: left;
+  font-family: var(--gran);
+  font-size: 3.6em;
+  line-height: .82;
+  padding: 6px 10px 0 0;
+  color: var(--sangre);
+}
+
+/* ============================================================
+   Portada
+   ============================================================ */
+.hero {
+  padding: 84px 24px 40px;
+  text-align: center;
+  border-bottom: 3px double var(--linea);
+}
+.hero__inner { max-width: 760px; margin: 0 auto; }
+.hero__kicker {
+  margin: 0 0 18px;
+  font-family: var(--titulos);
+  font-size: .8rem;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: var(--tinta-tenue);
+}
+.hero__title {
+  margin: 0 0 12px;
+  font-family: var(--gran);
+  font-weight: 700;
+  font-size: clamp(2rem, 6vw, 3.6rem);
+  line-height: 1.12;
+  letter-spacing: .02em;
+  color: var(--tinta);
+  text-shadow: 0 1px 0 rgba(255, 250, 235, .6);
+}
+.hero__sub {
+  margin: 0;
+  font-style: italic;
+  font-size: 1.15rem;
+  color: var(--tinta-tenue);
+}
+.hero__lead {
+  margin: 8px auto 0;
+  text-align: left;
+  font-size: 1.12rem;
+  max-width: 62ch;
+}
+
+/* ============================================================
+   Índice
+   ============================================================ */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2px 4px;
+  padding: 8px 24px;
+  background: color-mix(in srgb, var(--pergamino) 92%, transparent);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--linea);
+  box-shadow: 0 6px 18px -12px rgba(43, 29, 14, .5);
+}
+.nav__link {
+  flex: 0 0 auto;
+  padding: 6px 12px;
+  color: var(--tinta-tenue);
+  text-decoration: none;
+  font-family: var(--serif);
+  font-size: .95rem;
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  transition: color .2s ease, border-color .2s ease;
+}
+.nav__num {
+  font-family: var(--titulos);
+  font-weight: 700;
+  font-size: .8rem;
+  color: var(--sangre);
+  margin-right: 4px;
+}
+.nav__link:hover { color: var(--tinta); }
+.nav__link.is-active { color: var(--tinta); border-bottom-color: var(--sangre); }
+
+/* ============================================================
+   Capítulos (hojas)
+   ============================================================ */
+.main {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 56px 24px 72px;
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+}
+
+.card {
+  position: relative;
+  background-color: var(--pagina);
+  background-image: var(--grano);
+  border: 1px solid var(--linea);
+  outline: 1px solid var(--linea-suave);
+  outline-offset: 5px;
+  box-shadow:
+    0 1px 0 rgba(255, 250, 235, .6) inset,
+    0 18px 40px -22px rgba(43, 29, 14, .55);
+  padding: 34px 40px 26px;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity .7s ease, transform .7s cubic-bezier(.22, .8, .3, 1);
+}
+.card.is-visible { opacity: 1; transform: none; }
+
+/* florituras en las esquinas */
+.card::before,
+.card::after {
+  content: '❧';
+  position: absolute;
+  color: var(--oro);
+  font-size: 1.3rem;
+  opacity: .8;
+}
+.card::before { top: 8px; left: 12px; }
+.card::after  { bottom: 6px; right: 12px; transform: rotate(180deg); }
+
+.card__head { text-align: center; margin-bottom: 18px; }
+.card__chapter {
+  margin: 0 0 6px;
+  font-family: var(--titulos);
+  font-size: .78rem;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--sangre);
+}
+.card__title {
+  margin: 0 0 8px;
+  font-family: var(--titulos);
+  font-weight: 600;
+  font-size: clamp(1.35rem, 3vw, 1.8rem);
+  line-height: 1.2;
+  letter-spacing: .01em;
+}
+.card__desc {
+  margin: 0;
+  font-style: italic;
+  color: var(--tinta-tenue);
+}
+
+.card__story {
+  max-width: 68ch;
+  margin: 0 auto 22px;
+  padding-top: 14px;
+  border-top: 1px solid var(--linea-suave);
+}
+.card__story p { margin: 0; font-size: 1.08rem; }
+.card__story p::first-letter {
+  float: left;
+  font-family: var(--gran);
+  font-size: 3.2em;
+  line-height: .82;
+  padding: 5px 8px 0 0;
+  color: var(--sangre);
+}
+.card__story strong { font-weight: normal; color: var(--sangre); }
+
+/* Controles (sellos de cera / botones de imprenta) */
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px 22px;
+  align-items: center;
+  margin-bottom: 18px;
+}
+.control { display: flex; align-items: center; gap: 8px; }
+.control__label {
+  font-family: var(--titulos);
+  font-size: .72rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--tinta-tenue);
+}
+
+.segmented {
+  display: inline-flex;
+  border: 1px solid var(--linea);
+  background: var(--pagina-2);
+}
+.segmented button {
+  padding: 5px 12px;
+  border: 0;
+  border-right: 1px solid var(--linea-suave);
+  background: transparent;
+  color: var(--tinta-tenue);
+  font-family: var(--serif);
+  font-size: .95rem;
+  cursor: pointer;
+  transition: background .2s ease, color .2s ease;
+}
+.segmented button:last-child { border-right: 0; }
+.segmented button:hover { color: var(--tinta); background: rgba(255, 250, 235, .5); }
+.segmented button.is-active { background: var(--sangre); color: var(--pagina); }
+
+.btn-icon {
+  padding: 5px 12px;
+  border: 1px solid var(--linea);
+  background: var(--pagina-2);
+  color: var(--tinta-tenue);
+  font-family: var(--serif);
+  font-size: .95rem;
+  cursor: pointer;
+  transition: all .2s ease;
+}
+.btn-icon:hover { color: var(--tinta); border-color: var(--sangre); }
+
+/* Controles deshabilitados mientras se cargan los datos */
+.segmented button:disabled,
+.btn-icon:disabled { opacity: .35; cursor: progress; }
+
+/* Lienzo */
+.chart-box {
+  position: relative;
+  width: 100%;
+  height: clamp(280px, 48vh, 460px);
+}
+.chart-box canvas { width: 100% !important; }
+
+/* Leyenda propia e interactiva */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px 18px;
+  margin-top: 16px;
+}
+.legend__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 3px 8px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--tinta);
+  font-family: var(--serif);
+  font-size: .98rem;
+  cursor: pointer;
+  transition: opacity .2s ease, border-color .2s ease;
+}
+.legend__item:hover { border-color: var(--linea-suave); }
+.legend__item.is-off { opacity: .4; text-decoration: line-through; }
+.legend__swatch {
+  width: 14px;
+  height: 14px;
+  flex: 0 0 auto;
+  border: 1px solid rgba(43, 29, 14, .4);
+  transform: rotate(45deg) scale(.8);
+}
+
+.card__note {
+  margin: 16px 0 0;
+  text-align: center;
+  font-style: italic;
+  font-size: .9rem;
+  color: var(--tinta-tenue);
+}
+
+.error {
+  padding: 16px;
+  border: 1px dashed var(--sangre);
+  color: var(--sangre);
+  font-size: .95rem;
+}
+
+/* ============================================================
+   Cierre
+   ============================================================ */
+.footer {
+  padding: 24px 24px 56px;
+  border-top: 3px double var(--linea);
+  color: var(--tinta-tenue);
+  font-size: .95rem;
+  text-align: center;
+}
+.footer p { margin: 4px 0; }
+.footer__end {
+  font-family: var(--titulos);
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  font-size: .85rem;
+  color: var(--tinta);
+}
+.footer__meta { opacity: .65; font-style: italic; }
+
+@media (max-width: 640px) {
+  body { font-size: 16px; }
+  .nav { flex-wrap: nowrap; justify-content: flex-start; overflow-x: auto; scrollbar-width: none; }
+  .hero { padding: 56px 18px 32px; }
+  .main { padding: 40px 14px 56px; gap: 44px; }
+  .card { padding: 26px 18px 20px; }
+  .controls { gap: 8px 14px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card { transition: none; opacity: 1; transform: none; }
+  html { scroll-behavior: auto; }
+}
+
+/* Tarjetas de mapa (render() en vez de Chart.js) */
+.chart-box--mapa { height: auto; }
+.mapa { position: relative; }
+.mapa > svg {
+  width: 100%;
+  height: auto;
+  max-height: 70vh;
+  display: block;
+  border: 1px solid var(--linea);
+  background: var(--pagina-2);
+}
+.mapa #regiones path { cursor: pointer; transition: fill .3s ease; }
+.mapa #regiones path:hover { stroke-width: 2.5; filter: brightness(.92); }
+
+.marcador { cursor: pointer; transform-box: fill-box; transform-origin: center; animation: marcador-entra .6s cubic-bezier(.3,1.4,.5,1) both; }
+.marcador:hover circle:first-child { r: 17; }
+@keyframes marcador-entra { from { opacity: 0; scale: .2; } to { opacity: 1; scale: 1; } }
+
+.mapa__tip {
+  position: absolute;
+  top: 0; left: 0;
+  z-index: 5;
+  max-width: 260px;
+  padding: 8px 12px;
+  background: #fbf5e6;
+  border: 1px solid var(--borde, #8a6f4e);
+  color: var(--tinta);
+  font-size: .92rem;
+  line-height: 1.4;
+  pointer-events: none;
+  box-shadow: 0 8px 20px -10px rgba(43, 29, 14, .6);
+}
+.mapa__tip strong { font-family: var(--titulos); font-size: .8rem; letter-spacing: .04em; }
+
+.mapa__escala {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+  font-size: .9rem;
+  color: var(--tinta-tenue);
+}
+.mapa__escala-titulo { font-family: var(--titulos); font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; margin-right: 6px; }
+.mapa__escala svg { width: auto; height: 60px; flex: 0 0 auto; }
+.mapa__escala-barra { width: min(220px, 40%); height: 12px; border: 1px solid var(--linea); }
+
+/* Símbolos proporcionales del mapa estadístico */
+.simbolo { cursor: pointer; transform-box: fill-box; transform-origin: center; animation: marcador-entra .7s cubic-bezier(.3,1.3,.5,1) both; }
+.simbolo:hover circle { filter: brightness(1.1); }
+.mapa #region-vencido { cursor: pointer; }
