@@ -20,7 +20,7 @@
  * Para contenido que no es un chart de Chart.js (por ejemplo un mapa), en vez
  * de config() se define render(contenedor, datos, estado): base.js le pasa el
  * <div class="chart-box"> vacío y vuelve a llamarlo cada vez que cambia un
- * control. Ver js/charts/mapa-ubicacion.js y mapa-regiones.js.
+ * control. Ver js/charts/mapa-ciudades.js.
  *
  * base.js se encarga de: maquetar la tarjeta, cargar los datos, crear el chart
  * cuando entra en pantalla (animación de entrada), reaccionar a los controles,

@@ -25,7 +25,7 @@ El sitio está en <https://pascual890.github.io/Visualizaci-n-de-datos-Cregon/>.
 Tras cada cambio: `git add . && git commit -m "..." && git push`.
 
 El archivo `.nojekyll` de la raíz es necesario: sin él GitHub ignora los
-archivos que empiezan por `_` (como `js/charts/_mapa-util.js`) y la página se
+archivos y carpetas que empiezan por `_` y la página se
 queda sin gráficos.
 
 ## Estructura
@@ -34,6 +34,7 @@ queda sin gráficos.
 index.html                  Página principal (cabecera, nav, contenedor)
 css/styles.css              Estilos y variables de color
 data/*.json                 Datos de cada gráfico (transcritos de las tablas de Flourish)
+assets/cregon.svg           Contorno del reino (mapa)
 Datos/                      Originales: PDF de Flourish y capturas de las tablas
 js/main.js                  Punto de entrada: monta los capítulos y el índice
 js/registry.js              Índice: qué capítulos se muestran y en qué orden
@@ -80,9 +81,10 @@ Distribución (dona, tarta):
 
 | Cap. | Gráfico | Interacciones |
 |------|---------|---------------|
-| I | Riqueza de los nobles (barras) | con/sin el reino, ordenar |
-| II | Casas nobles en pie (barras / escalera) | cambiar forma |
-| III | Habitantes tras la guerra (anillo / tarta) | forma, personas / %, leyenda |
-| IV | Dueños de la tierra (tarta) | detalle / nobles vs. resto, leyenda |
-| V | Transferencia de riqueza (líneas) | monedas / índice, franja de guerra, leyenda |
-| VI | Robos reportados (línea / barras) | total / cambio anual, franja de guerra |
+| I | Mapa de las ciudades (círculos proporcionales sobre el reino) | dato (habitantes / robos / riqueza), ocultar ciudades |
+| II | Riqueza de los nobles (barras) | con/sin el reino, ordenar |
+| III | Casas nobles en pie (barras / escalera) | cambiar forma |
+| IV | Habitantes tras la guerra (anillo / tarta) | forma, personas / %, leyenda |
+| V | Dueños de la tierra (tarta) | detalle / nobles vs. resto, leyenda |
+| VI | Transferencia de riqueza (líneas) | monedas / índice, franja de guerra, leyenda |
+| VII | Robos reportados (línea / barras) | total / cambio anual, franja de guerra |

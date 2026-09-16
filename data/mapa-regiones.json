@@ -1,8 +1,0 @@
-{
-  "mapa": "assets/cregon-borrador.svg",
-  "medidas": {
-    "tierra":     { "titulo": "Tierra en manos de nobles", "unidad": "%",       "valores": { "norte": 90, "valle": 70, "costa": 65, "aldeas": 20, "bosque": 0 } },
-    "robos":      { "titulo": "Robos denunciados en 1218", "unidad": "robos",   "valores": { "norte": 120, "valle": 260, "costa": 310, "aldeas": 400, "bosque": 60 } },
-    "habitantes": { "titulo": "Habitantes tras la guerra", "unidad": "personas", "valores": { "norte": 6500, "valle": 9000, "costa": 8000, "aldeas": 10000, "bosque": 1000 } }
-  }
-}
