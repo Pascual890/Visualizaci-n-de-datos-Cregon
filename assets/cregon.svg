@@ -49,11 +49,17 @@
     <path d="M230 300 l12 -18 l12 18 M500 300 l12 -18 l12 18 M760 380 l12 -18 l12 18"/>
   </g>
 
-  <!-- río, decorativo -->
-  <path d="M470 250 C440 330 380 380 330 430 C280 480 250 520 262 570 C270 610 240 660 220 700"
-        fill="none" stroke="#2f4a6d" stroke-opacity=".55" stroke-width="2" pointer-events="none"/>
-  <path d="M640 380 C600 420 520 470 470 500 C420 530 380 540 340 535"
-        fill="none" stroke="#2f4a6d" stroke-opacity=".45" stroke-width="1.5" pointer-events="none"/>
+
+
+  <!-- camino de Aaron y Leo tras la guerra: de Dornhal a Aldemar (se muestra solo en modo ubicación) -->
+  <g id="ruta" class="ruta" pointer-events="none">
+    <path id="ruta-camino" d="M-110 440 C-40 455 40 470 110 505 C160 530 205 548 258 570"
+          fill="none" stroke="#8a2f1f" stroke-width="3" stroke-linecap="round" stroke-dasharray="9 7"/>
+    <path d="M258 570 l-14 -9 l3 9 l-3 9 Z" fill="#8a2f1f" stroke="none"/>
+    <text font-size="13" font-style="italic" fill="#8a2f1f" dy="-8">
+      <textPath href="#ruta-camino" startOffset="14%">camino de Aaron y Leo tras la guerra</textPath>
+    </text>
+  </g>
 
   <!-- capa para las ciudades -->
   <g id="ciudades"></g>

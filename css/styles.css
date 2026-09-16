@@ -23,6 +23,7 @@
 }
 
 * { box-sizing: border-box; }
+[hidden] { display: none !important; }
 html { scroll-behavior: smooth; }
 
 body {
@@ -392,6 +393,13 @@ body {
 .ciudad:hover circle:first-child { filter: brightness(1.12); stroke-width: 2; }
 .ciudad.is-off { animation: none; opacity: 0; scale: .3; pointer-events: none; }
 .ciudad__nombre { font-family: var(--serif); font-style: italic; pointer-events: none; }
+/* camino de Aaron (solo en modo ubicación) */
+.ruta { opacity: 0; transition: opacity .6s ease; }
+.ruta.is-visible { opacity: 1; }
+.ruta.is-visible #ruta-camino { animation: ruta-avanza 1.6s linear infinite; }
+@keyframes ruta-avanza { to { stroke-dashoffset: -32; } }
+.ciudad--punto circle:first-child { transition: r .8s cubic-bezier(.3,1.2,.5,1); }
+
 @keyframes ciudad-entra { from { opacity: 0; scale: .3; } to { opacity: 1; scale: 1; } }
 
 .mapa__tip {

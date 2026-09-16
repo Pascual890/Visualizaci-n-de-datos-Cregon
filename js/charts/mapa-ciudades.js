@@ -8,18 +8,21 @@ import { montarSvg, conTooltip } from './mapa-util.js';
  */
 const SVG_NS = 'http://www.w3.org/2000/svg';
 const RADIO_MAX = 52;   // radio del círculo de la ciudad con la cifra más alta
+const RADIO_PUNTO = 6;  // radio del punto en el mapa de ubicación
 
 export default {
   id: 'mapa-ciudades',
   capitulo: 'I',
   titulo: 'Del reino de Cregon y sus ciudades',
-  descripcion: 'Dónde pasa la historia y cuánta gente, cuánto oro y cuántos robos hay en cada ciudad.',
+  descripcion: 'Dónde pasa la historia; y, eligiendo un dato, cuánta gente, cuánto oro y cuántos robos hay en cada ciudad.',
   relato: 'Cregon es un reino pequeño, encajado entre montañas. Al oeste, al otro lado de la frontera, ' +
-          'está Dornhal, el reino que perdió la guerra de 1207 a 1210 y del que solo quedan ruinas. ' +
-          'La capital, Aldemar, está en el valle del sur, y ahí, en su plaza, es donde los hermanos ' +
-          'roban la daga. Cada casa noble tiene su ciudad: Caerlún es la fortaleza de Vareck, Ordane ' +
-          'la de Vandel y Torvane la de Voss. El tamaño de cada círculo dice cuánto hay de lo que se ' +
-          'está mirando; cambia el dato arriba y verás que la riqueza y los robos no viven en los mismos sitios.',
+          'está Dornhal, el reino que perdió la guerra de 1207 a 1210 y del que solo quedan ruinas: ' +
+          'de allí vienen Aaron y su hermano Leo. El camino punteado es el que tomaron tras la guerra ' +
+          'hasta Aldemar, la capital de Cregon, donde años después Aaron roba la daga en plena plaza. ' +
+          'Cada casa noble tiene su ciudad: Caerlún es la fortaleza de ' +
+          'Vareck, Ordane la de Vandel y Torvane la de Voss. Si eliges un dato arriba, cada ciudad se ' +
+          'convierte en un círculo cuyo tamaño dice cuánto hay de eso; verás que la riqueza y los ' +
+          'robos no viven en los mismos sitios.',
   nota: 'Carta de las ciudades del reino, año 1218. Las ocho ciudades suman los 34.500 habitantes, ' +
         'los 1.150 robos y las 2.200 mil monedas (1.200 de las casas y 1.000 del pueblo) de los capítulos siguientes.',
   datos: 'data/mapa-ciudades.json',
@@ -28,8 +31,9 @@ export default {
     {
       id: 'medida',
       etiqueta: 'Dato',
-      valor: 'habitantes',
+      valor: 'ubicacion',
       opciones: [
+        { valor: 'ubicacion', texto: 'Ubicación' },
         { valor: 'habitantes', texto: 'Habitantes' },
         { valor: 'robos', texto: 'Robos' },
         { valor: 'riqueza', texto: 'Riqueza' }
@@ -42,11 +46,15 @@ export default {
 
   async render(contenedor, datos, estado) {
     const svg = await montarSvg(contenedor, datos.mapa);
-    const medida = datos.medidas[estado.medida];
-    const clave = estado.medida;
+    const ubicacion = estado.medida === 'ubicacion';
+    const medida = ubicacion ? null : datos.medidas[estado.medida];
+    const clave = ubicacion ? 'habitantes' : estado.medida;   // en ubicación solo se usa para ordenar
     const max = Math.max(...datos.ciudades.map(c => c[clave]), 1);
-    const radio = (v) => Math.sqrt(v / max) * RADIO_MAX;   // área ∝ valor
+    const radio = (v) => (ubicacion ? RADIO_PUNTO : Math.sqrt(v / max) * RADIO_MAX);   // área ∝ valor
     const formato = (v) => `${fmt.num.format(v)} ${medida.unidad}`;
+
+    // camino de Aaron: solo en el mapa de ubicación
+    svg.querySelector('#ruta')?.classList.toggle('is-visible', ubicacion);
 
     // --- círculos --------------------------------------------------------
     const capa = svg.querySelector('#ciudades');
@@ -87,6 +95,7 @@ export default {
 
         g.append(circulo, punto, texto);
         conTooltip(contenedor, g, () => {
+          if (estado.medida === 'ubicacion') return `<strong>${c.nombre}</strong><br><em>${c.nota}</em>`;
           const m = datos.medidas[estado.medida];
           return `<strong>${c.nombre}</strong><br>${m.titulo}: ${fmt.num.format(c[estado.medida])} ${m.unidad}<br><em>${c.nota}</em>`;
         });
@@ -102,7 +111,9 @@ export default {
       texto.setAttribute('x', r + 6);
       texto.setAttribute('y', 5);
 
-      g.classList.toggle('is-off', this.ocultas.has(c.nombre));
+      // en ubicación se ven todas las ciudades (la leyenda no aplica)
+      g.classList.toggle('is-off', !ubicacion && this.ocultas.has(c.nombre));
+      g.classList.toggle('ciudad--punto', ubicacion);
       capa.appendChild(g);   // reordena por tamaño
     });
 
@@ -126,6 +137,7 @@ export default {
       });
       wrap.appendChild(leyenda);
     }
+    leyenda.hidden = ubicacion;
 
     // --- escala de tamaños --------------------------------------------------
     let escala = wrap.querySelector('.mapa__escala');
@@ -134,6 +146,9 @@ export default {
       escala.className = 'mapa__escala';
       wrap.appendChild(escala);
     }
+    escala.hidden = ubicacion;
+    if (ubicacion) return;
+
     const rMedio = radio(max / 4);
     const alto = RADIO_MAX * 2 + 4;
     escala.innerHTML = `
