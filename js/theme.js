@@ -149,9 +149,61 @@ export const textoCentro = {
   }
 };
 
+/**
+ * Plugin: escribe el valor dentro de cada sector de una tarta o anillo,
+ * sin tener que pasar el ratón por encima.
+ * Se activa con  plugins: { etiquetasSectores: { activo: true, formato: (valor, indice, chart) => texto } }.
+ */
+export const etiquetasSectores = {
+  id: 'etiquetasSectores',
+  afterDatasetsDraw(chart, _args, opts) {
+    if (!opts?.activo) return;
+    const tipo = chart.config.type;
+    if (tipo !== 'pie' && tipo !== 'doughnut') return;
+
+    const { ctx } = chart;
+    const meta = chart.getDatasetMeta(0);
+    const datos = chart.data.datasets[0].data;
+    const total = datos.reduce((a, v, i) => a + (chart.getDataVisibility(i) ? v : 0), 0);
+    const formato = opts.formato || ((v) => String(v));
+
+    ctx.save();
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.lineJoin = 'round';
+
+    meta.data.forEach((arco, i) => {
+      if (!chart.getDataVisibility(i)) return;
+      const v = datos[i];
+      const fraccion = total ? v / total : 0;
+      if (fraccion < 0.03) return;                       // sector demasiado fino para escribir dentro
+
+      const angulo = (arco.startAngle + arco.endAngle) / 2;
+      const radio = (arco.innerRadius + arco.outerRadius) / 2;
+      const x = arco.x + Math.cos(angulo) * radio;
+      const y = arco.y + Math.sin(angulo) * radio;
+
+      const texto = formato(v, i, chart);
+      const lineas = String(texto).split('\n');
+      const tam = fraccion < 0.08 ? 12 : 15;
+      ctx.font = `700 ${tam}px 'Cinzel', Georgia, serif`;
+      ctx.lineWidth = 3;
+      ctx.strokeStyle = 'rgba(43, 29, 14, .55)';
+      ctx.fillStyle = '#f7efdc';
+
+      lineas.forEach((linea, j) => {
+        const dy = (j - (lineas.length - 1) / 2) * (tam + 3);
+        ctx.strokeText(linea, x, y + dy);
+        ctx.fillText(linea, x, y + dy);
+      });
+    });
+    ctx.restore();
+  }
+};
+
 /** Aplica los defaults al objeto Chart global (se llama una vez desde main.js). */
 export function aplicarTema(Chart) {
-  Chart.register(bandaGuerra, valoresBarras, textoCentro);
+  Chart.register(bandaGuerra, valoresBarras, textoCentro, etiquetasSectores);
 
   Chart.defaults.font.family = "'IM Fell English', 'EB Garamond', Georgia, serif";
   Chart.defaults.font.size = 13;

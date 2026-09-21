@@ -65,6 +65,12 @@ export default {
         animation: { animateRotate: true, animateScale: true, duration: 1200 },
         plugins: {
           textoCentro: { titulo: fmt.num.format(total), subtitulo: 'almas antes de la guerra' },
+          etiquetasSectores: {
+            activo: true,
+            formato: (v) => estado.unidad === 'pct'
+              ? fmt.pct.format(v / total)
+              : `${fmt.num.format(v)}\n${fmt.pct.format(v / total)}`
+          },
           tooltip: { callbacks: { label: (c) => ` ${etiqueta(c.parsed)}` } }
         }
       }

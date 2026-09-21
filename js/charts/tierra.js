@@ -63,6 +63,7 @@ export default {
         rotation: -90,
         animation: { animateRotate: true, animateScale: false, duration: 1200 },
         plugins: {
+          etiquetasSectores: { activo: true, formato: (v) => `${fmt.dec.format(v)} %` },
           tooltip: { callbacks: { label: (c) => ` ${fmt.dec.format(c.parsed)} % de la tierra` } }
         }
       }
