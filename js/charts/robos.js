@@ -8,7 +8,7 @@ import { color, alfa, ejesBase, fmt } from '../theme.js';
 export default {
   id: 'robos',
   capitulo: 'VII',
-  titulo: 'De los robos que se denuncian',
+  titulo: 'Los robos que se denuncian',
   descripcion: 'Robos reportados en el reino de Cregon cada año, de 1199 a 1218.',
   relato: 'Antes de la guerra, los alguaciles anotaban poco más de trescientos robos al año. ' +
           'Con el hambre de 1208 llegaron a cuatrocientos setenta; con la paz, a casi novecientos. ' +

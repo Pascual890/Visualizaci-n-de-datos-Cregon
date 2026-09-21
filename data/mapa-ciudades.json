@@ -5,10 +5,6 @@
       "titulo": "Habitantes en 1218",
       "unidad": "personas"
     },
-    "robos": {
-      "titulo": "Robos denunciados en 1218",
-      "unidad": "robos"
-    },
     "riqueza": {
       "titulo": "Riqueza en 1218",
       "unidad": "mil monedas"
@@ -21,7 +17,6 @@
       "y": 570,
       "nota": "Capital del reino. Aquí viven Aaron y Leo, y en su plaza es donde Aaron roba la daga.",
       "habitantes": 10600,
-      "robos": 410,
       "riqueza": 520
     },
     {
@@ -30,7 +25,6 @@
       "y": 530,
       "nota": "Ciudad de mercaderes, pegada a la capital.",
       "habitantes": 6800,
-      "robos": 190,
       "riqueza": 380
     },
     {
@@ -39,7 +33,6 @@
       "y": 494,
       "nota": "Sede de la casa Voss, al este.",
       "habitantes": 4500,
-      "robos": 95,
       "riqueza": 260
     },
     {
@@ -48,7 +41,6 @@
       "y": 704,
       "nota": "Pueblo del sur, tierra de aldeanos.",
       "habitantes": 3700,
-      "robos": 160,
       "riqueza": 60
     },
     {
@@ -57,7 +49,6 @@
       "y": 330,
       "nota": "Sede de la casa Vandel, en el valle alto.",
       "habitantes": 3200,
-      "robos": 70,
       "riqueza": 300
     },
     {
@@ -66,7 +57,6 @@
       "y": 370,
       "nota": "Fortaleza de la casa Vareck, en las montañas.",
       "habitantes": 2500,
-      "robos": 40,
       "riqueza": 610
     },
     {
@@ -75,7 +65,6 @@
       "y": 445,
       "nota": "Aldea de pastores, junto a la frontera con Dornhal.",
       "habitantes": 1900,
-      "robos": 85,
       "riqueza": 40
     },
     {
@@ -84,7 +73,6 @@
       "y": 300,
       "nota": "Pueblo de las montañas del este.",
       "habitantes": 1300,
-      "robos": 100,
       "riqueza": 30
     }
   ]

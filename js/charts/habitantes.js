@@ -8,7 +8,7 @@ import { color, alfa, fmt } from '../theme.js';
 export default {
   id: 'habitantes',
   capitulo: 'IV',
-  titulo: 'De los habitantes tras la guerra',
+  titulo: 'Los habitantes tras la guerra',
   descripcion: 'Qué fue de las gentes de Cregon: quiénes siguen, quiénes cayeron y quiénes partieron.',
   relato: 'Cuarenta y ocho mil almas contaba el reino antes de la guerra. Ocho mil doscientas ' +
           'quedaron en los campos de batalla; cinco mil trescientas cruzaron las montañas para no volver. ' +

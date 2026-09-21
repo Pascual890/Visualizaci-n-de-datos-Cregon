@@ -7,7 +7,7 @@ import { color, alfa, ejesBase, fmt } from '../theme.js';
 export default {
   id: 'riqueza-nobles',
   capitulo: 'II',
-  titulo: 'De la riqueza de los nobles',
+  titulo: 'La riqueza de los nobles',
   descripcion: 'Comparación del tesoro de cada casa, en miles de monedas.',
   relato: 'La daga que robaron los hermanos estaba en manos de <strong>Vareck</strong>, la casa más ' +
           'rica de Cregon: tiene casi dos tercios de todo el oro de los nobles. Vandel y Voss, ' +

@@ -7,7 +7,7 @@ import { color, alfa, ejesBase } from '../theme.js';
 export default {
   id: 'casas-nobles',
   capitulo: 'III',
-  titulo: 'De las casas que quedaron en pie',
+  titulo: 'Las casas que quedaron en pie',
   descripcion: 'Número de casas nobles en Cregon antes, al terminar y después de la guerra.',
   relato: 'Doce casas se sentaban a la mesa del rey cuando comenzó la guerra en el año 1207. ' +
           'Al firmarse la paz en 1210 quedaban siete, y la paz resultó más cruel que la guerra: ' +

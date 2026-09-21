@@ -7,7 +7,7 @@ import { color, alfa, fmt } from '../theme.js';
 export default {
   id: 'tierra',
   capitulo: 'V',
-  titulo: 'De quién es la tierra',
+  titulo: 'Quién es dueño de la tierra',
   descripcion: 'Reparto de la tierra de Cregon, en porcentaje.',
   relato: 'Tres de cada cuatro fanegas de Cregon llevan hoy el sello de una casa noble. ' +
           'Vareck posee por sí sola más de un tercio del reino. A los aldeanos, que son la ' +

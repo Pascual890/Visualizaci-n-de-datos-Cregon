@@ -8,7 +8,7 @@ import { color, alfa, ejesBase, fmt } from '../theme.js';
 export default {
   id: 'riqueza-tendencia',
   capitulo: 'VI',
-  titulo: 'De cómo la guerra cambió de manos el oro',
+  titulo: 'Cómo la guerra cambió de manos el oro',
   descripcion: 'Riqueza de la gente común y de las casas nobles, año a año, de 1199 a 1218.',
   relato: 'Durante veinte años la gente común guardó casi el doble que los nobles. La guerra ' +
           'lo cambió todo en tres inviernos: entre 1207 y 1210 el pueblo perdió dos tercios de ' +

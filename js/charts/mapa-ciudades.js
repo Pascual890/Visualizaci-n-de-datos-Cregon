@@ -13,18 +13,17 @@ const RADIO_PUNTO = 6;  // radio del punto en el mapa de ubicación
 export default {
   id: 'mapa-ciudades',
   capitulo: 'I',
-  titulo: 'Del reino de Cregon y sus ciudades',
-  descripcion: 'Dónde pasa la historia; y, eligiendo un dato, cuánta gente, cuánto oro y cuántos robos hay en cada ciudad.',
+  titulo: 'El reino de Cregon y sus ciudades',
+  descripcion: 'Dónde pasa la historia; y, eligiendo un dato, cuánta gente y cuánto oro hay en cada ciudad.',
   relato: 'Cregon es un reino pequeño, encajado entre montañas. Al oeste, al otro lado de la frontera, ' +
           'está Dornhal, el reino que perdió la guerra de 1207 a 1210 y del que solo quedan ruinas: ' +
           'de allí vienen Aaron y su hermano Leo. El camino punteado es el que tomaron tras la guerra ' +
           'hasta Aldemar, la capital de Cregon, donde años después Aaron roba la daga en plena plaza. ' +
           'Cada casa noble tiene su ciudad: Caerlún es la fortaleza de ' +
           'Vareck, Ordane la de Vandel y Torvane la de Voss. Si eliges un dato arriba, cada ciudad se ' +
-          'convierte en un círculo cuyo tamaño dice cuánto hay de eso; verás que la riqueza y los ' +
-          'robos no viven en los mismos sitios.',
-  nota: 'Carta de las ciudades del reino, año 1218. Las ocho ciudades suman los 34.500 habitantes, ' +
-        'los 1.150 robos y las 2.200 mil monedas (1.200 de las casas y 1.000 del pueblo) de los capítulos siguientes.',
+          'convierte en un círculo cuyo tamaño dice cuánto hay de eso; verás que donde más gente ' +
+          'vive no es donde más oro hay.',
+  nota: 'Carta de las ciudades del reino, año 1218.',
   datos: 'data/mapa-ciudades.json',
 
   controles: [
@@ -35,7 +34,6 @@ export default {
       opciones: [
         { valor: 'ubicacion', texto: 'Ubicación' },
         { valor: 'habitantes', texto: 'Habitantes' },
-        { valor: 'robos', texto: 'Robos' },
         { valor: 'riqueza', texto: 'Riqueza' }
       ]
     }
