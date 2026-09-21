@@ -2,7 +2,7 @@ import { color, alfa, ejesBase, fmt } from '../theme.js';
 
 /**
  * CAPÍTULO VI — Transferencia de riqueza (líneas, dos series).
- * Interacciones: monedas o índice (1199 = 100), mostrar/ocultar la franja de guerra,
+ * Interacciones: mostrar/ocultar la franja de guerra,
  * ocultar series desde la leyenda.
  */
 export default {
@@ -19,15 +19,6 @@ export default {
 
   controles: [
     {
-      id: 'modo',
-      etiqueta: 'Medida',
-      valor: 'monedas',
-      opciones: [
-        { valor: 'monedas', texto: 'Monedas' },
-        { valor: 'indice', texto: 'Índice (1199 = 100)' }
-      ]
-    },
-    {
       id: 'guerra',
       etiqueta: 'Guerra',
       valor: 'si',
@@ -39,7 +30,6 @@ export default {
   ],
 
   config(datos, estado) {
-    const indice = estado.modo === 'indice';
     const tonos = [color(2), color(0)];   // gente común: verde · casas nobles: sangre
 
     return {
@@ -48,7 +38,7 @@ export default {
         labels: datos.labels,
         datasets: datos.series.map((s, i) => ({
           label: s.nombre,
-          data: indice ? s.valores.map(v => v / s.valores[0] * 100) : s.valores,
+          data: s.valores,
           borderColor: tonos[i],
           backgroundColor: alfa(tonos[i], 0.9),
           borderWidth: 2.5,
@@ -70,7 +60,7 @@ export default {
             ...ejesBase.y,
             title: {
               display: true,
-              text: indice ? 'índice, 1199 = 100' : 'miles de monedas',
+              text: 'miles de monedas',
               color: '#6e5a45',
               font: { style: 'italic' }
             }
@@ -81,7 +71,7 @@ export default {
           tooltip: {
             callbacks: {
               title: (items) => `Año ${items[0].label}`,
-              label: (c) => ` ${c.dataset.label}: ${indice ? fmt.dec.format(c.parsed.y) : fmt.num.format(c.parsed.y) + ' mil'}`
+              label: (c) => ` ${c.dataset.label}: ${fmt.num.format(c.parsed.y)} mil`
             }
           }
         }
